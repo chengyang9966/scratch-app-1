@@ -7,6 +7,8 @@ import "./NewNote.css";
 import { API } from "aws-amplify";
 import { useAppContext } from "../lib/contextLib";
 import { s3Upload } from "../lib/awsLib";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 export default function NewNote() {
   const { setErrorMsg } = useAppContext();
   const file = useRef(null);
@@ -54,14 +56,10 @@ export default function NewNote() {
   return (
     <div className="NewNote">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="content">
-          <Form.Control
-            value={content}
-            as="textarea"
-            onChange={(e) => setContent(e.target.value)}
-          />
+        <Form.Group controlId="content" style={{margin:`10px 0px`}}>
+        <ReactQuill style={{height:400,margin:`10px 0px`}} theme="snow" value={content} onChange={(e) => setContent(e.target.value)} />
         </Form.Group>
-        <Form.Group controlId="file">
+        <Form.Group controlId="file" style={{marginTop:70}}>
           <Form.Label>Attachment</Form.Label>
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>

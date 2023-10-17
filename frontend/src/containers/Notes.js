@@ -7,6 +7,8 @@ import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";
 import { s3Upload } from "../lib/awsLib";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 export default function Notes() {
   const file = useRef(null);
   const { id } = useParams();
@@ -120,14 +122,15 @@ const [isDeleting, setIsDeleting] = useState(false);
     <div className="Notes">
       {note && (
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="content">
-            <Form.Control
+          <Form.Group controlId="content" style={{margin:`10px 0px`}}>
+            {/* <Form.Control
               as="textarea"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-            />
+            /> */}
+            <ReactQuill style={{height:400,margin:`10px 0px`}} theme="snow" value={content} onChange={(e) => setContent(e.target.value)} />
           </Form.Group>
-          <Form.Group controlId="file">
+          <Form.Group controlId="file"  style={{marginTop:70}}  >
             <Form.Label>Attachment</Form.Label>
             {note.attachment && (
               <p>

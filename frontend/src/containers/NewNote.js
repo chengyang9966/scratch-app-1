@@ -57,7 +57,7 @@ export default function NewNote() {
     <div className="NewNote">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="content" style={{margin:`10px 0px`}}>
-        <ReactQuill style={{height:400,margin:`10px 0px`}} theme="snow" value={content} onChange={(e) => setContent(e.target.value)} />
+        <ReactQuill style={{height:400,margin:`10px 0px`}} theme="snow" value={content} onChange={setContent} />
         </Form.Group>
         <Form.Group controlId="file" style={{marginTop:70}}>
           <Form.Label>Attachment</Form.Label>

@@ -12,10 +12,11 @@ export const main = handler(async (event) => {
     },
     // 'UpdateExpression' defines the attributes to be updated
     // 'ExpressionAttributeValues' defines the value in the update expression
-    UpdateExpression: "SET content = :content, attachment = :attachment",
+    UpdateExpression: "SET content = :content, attachment = :attachment,title = :title",
     ExpressionAttributeValues: {
       ":attachment": data.attachment || null,
       ":content": data.content || null,
+      ":title": data.title || null,
     },
     // 'ReturnValues' specifies if and how to return the item's attributes,
     // where ALL_NEW returns all attributes of the item after the update; you

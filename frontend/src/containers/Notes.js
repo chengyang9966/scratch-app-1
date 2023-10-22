@@ -15,6 +15,7 @@ export default function Notes() {
   const nav = useNavigate();
   const [note, setNote] = useState(null);
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   const { setErrorMsg } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 const [isDeleting, setIsDeleting] = useState(false);
@@ -26,12 +27,13 @@ const [isDeleting, setIsDeleting] = useState(false);
     async function onLoad() {
       try {
         const note = await loadNote();
-        const { content, attachment } = note;
+        const { content, attachment,title } = note;
 
         if (attachment) {
           note.attachmentURL = await Storage.vault.get(attachment);
         }
 
+        setTitle(title);
         setContent(content);
         setNote(note);
       } catch (e) {
@@ -83,6 +85,7 @@ const [isDeleting, setIsDeleting] = useState(false);
       }
   
       await saveNote({
+        title,
         content,
         attachment: attachment || note.attachment,
       });
@@ -122,6 +125,15 @@ const [isDeleting, setIsDeleting] = useState(false);
     <div className="Notes">
       {note && (
         <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            autoFocus
+            type="title"
+            value={title}
+            onChange={e=>setTitle(e.target.value)}
+          />
+        </Form.Group>
           <Form.Group controlId="content" style={{margin:`10px 0px`}}>
             {/* <Form.Control
               as="textarea"

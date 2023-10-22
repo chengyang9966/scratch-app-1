@@ -13,7 +13,7 @@ export default function Links() {
   const AllRoutes=[
     {
     path:'/',
-    element:<Home />
+    element: <NewNote />
   },
   {
     path:'/*',

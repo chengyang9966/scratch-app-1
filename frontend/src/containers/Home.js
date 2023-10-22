@@ -40,11 +40,11 @@ export default function Home() {
             <p className="px-2 font-weight-bold d-inline-block">Create a new note</p>
           </ListGroup.Item>
         </LinkContainer>
-        {notes.map(({ noteId, content, createdAt }) => (
+        {notes.map(({ noteId, content, createdAt,title }) => (
           <LinkContainer key={noteId} to={`/notes/${noteId}`}>
             <ListGroup.Item action>
               <span className="font-weight-bold">
-                {content.trim().split("\n")[0]}
+                {title ?? content.trim().split("\n")[0]}
               </span>
               <br />
               <span className="text-muted">

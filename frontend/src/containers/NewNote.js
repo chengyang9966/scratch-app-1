@@ -14,6 +14,7 @@ export default function NewNote() {
   const file = useRef(null);
   const nav = useNavigate();
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   function validateForm() {
@@ -40,7 +41,7 @@ export default function NewNote() {
   
     try {
         const attachment = file.current ? await s3Upload(file.current) : null;
-      await createNote({ content,attachment });
+      await createNote({ content,attachment,title });
       nav("/");
     } catch (e) {
         setErrorMsg(current=>[...current,{message:e,title:'Create Notes'}])
@@ -56,6 +57,15 @@ export default function NewNote() {
   return (
     <div className="NewNote">
       <Form onSubmit={handleSubmit}>
+      <Form.Group size="lg" controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            autoFocus
+            type="title"
+            value={title}
+            onChange={e=>setTitle(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group controlId="content" style={{margin:`10px 0px`}}>
         <ReactQuill style={{height:400,margin:`10px 0px`}} theme="snow" value={content} onChange={setContent} />
         </Form.Group>

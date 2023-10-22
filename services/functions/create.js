@@ -13,6 +13,7 @@ export const main=handler(async(event)=> {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId, // The id of the author
       noteId: uuid.v1(), // A unique uuid
       content: data.content, // Parsed from request body
+      title: data.title, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
       createdAt: Date.now(), // Current Unix timestamp
     },

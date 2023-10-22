@@ -16,6 +16,7 @@ export const main=handler(async(event)=> {
       title: data.title, // Parsed from request body
       attachment: data.attachment, // Parsed from request body
       createdAt: Date.now(), // Current Unix timestamp
+      isActive: true, // Current Unix timestamp
     },
   };
 

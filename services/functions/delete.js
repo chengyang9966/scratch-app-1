@@ -9,9 +9,13 @@ export const main = handler(async (event) => {
       userId: event.requestContext.authorizer.iam.cognitoIdentity.identityId, // The id of the author
       noteId: event.pathParameters.id, // The id of the note from the path
     },
+    UpdateExpression: "SET isActive = :isactive",
+    ExpressionAttributeValues: {
+      ":isactive": false
+    },
   };
 
-  await dynamoDb.delete(params);
+  await dynamoDb.update(params);
 
   return { status: true,noteId:event.pathParameters.id };
 });

@@ -8,6 +8,7 @@ export const main = handler(async (event) => {
     // - 'userId = :userId': only return items with matching 'userId'
     //   partition key
     KeyConditionExpression: "userId = :userId",
+    FilterExpression: 'isActive = :isActive',
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be the id of the author
     ExpressionAttributeValues: {
